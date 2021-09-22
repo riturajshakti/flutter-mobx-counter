@@ -12,6 +12,9 @@ abstract class _Counter with Store {
   void increment() => value++;
 
   @action
+  void reset() => value = 0;
+
+  @action
   void decrement() => value--;
 }
 

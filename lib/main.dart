@@ -1,3 +1,4 @@
+import 'package:counter_app/store/autocounter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
@@ -11,6 +12,7 @@ void main() {
 class MyApp extends StatelessWidget {
   final counter = Counter();
   final theme = MyTheme();
+  final auto = AutoCounter();
 
   @override
   Widget build(BuildContext context) {
@@ -20,13 +22,19 @@ class MyApp extends StatelessWidget {
         theme: theme.data,
         home: Scaffold(
           appBar: AppBar(
-            title: Text('Counter: ${counter.value}'),
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('Counter: ${counter.value}'),
+                Text('Auto Counter: ${auto.value}'),
+              ],
+            ),
           ),
           body: Container(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                SizedBox(height: 50),
                 Text(
                   '${counter.value}',
                   style: TextStyle(fontSize: 100),
@@ -41,8 +49,45 @@ class MyApp extends StatelessWidget {
                     ),
                     SizedBox(width: 20),
                     IconButton(
+                      onPressed: counter.reset,
+                      icon: Icon(Icons.circle_outlined),
+                    ),
+                    SizedBox(width: 20),
+                    IconButton(
                       onPressed: counter.decrement,
                       icon: Icon(Icons.remove),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 30),
+                Divider(color: Colors.black),
+                SizedBox(height: 30),
+                Text(
+                  '${auto.value}',
+                  style: TextStyle(fontSize: 100),
+                ),
+                SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    IconButton(
+                      onPressed: auto.resume,
+                      icon: Icon(Icons.play_arrow),
+                    ),
+                    SizedBox(width: 20),
+                    IconButton(
+                      onPressed: auto.pause,
+                      icon: Icon(Icons.pause),
+                    ),
+                    SizedBox(width: 20),
+                    IconButton(
+                      onPressed: auto.reset,
+                      icon: Icon(Icons.restart_alt),
+                    ),
+                    SizedBox(width: 20),
+                    IconButton(
+                      onPressed: auto.stop,
+                      icon: Icon(Icons.stop),
                     ),
                   ],
                 )
@@ -51,16 +96,10 @@ class MyApp extends StatelessWidget {
           ),
           floatingActionButton: FloatingActionButton(
             onPressed: theme.toggle,
-            child: Icon(
-              isLight(theme.data) ? Icons.dark_mode : Icons.light_mode,
-            ),
+            child: theme.icon(),
           ),
         ),
       ),
     );
   }
-}
-
-bool isLight(ThemeData theme) {
-  return theme == ThemeData.fallback();
 }

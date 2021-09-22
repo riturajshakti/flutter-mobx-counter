@@ -10,6 +10,15 @@ abstract class _MyTheme with Store {
   ThemeData data = ThemeData.fallback();
 
   @action
+  Icon icon() {
+    if (data == ThemeData.fallback()) {
+      return Icon(Icons.dark_mode);
+    } else {
+      return Icon(Icons.light_mode);
+    }
+  }
+
+  @action
   void toggle() {
     if (data == ThemeData.fallback()) {
       data = ThemeData.dark();

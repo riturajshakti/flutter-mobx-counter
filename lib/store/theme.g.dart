@@ -27,6 +27,17 @@ mixin _$MyTheme on _MyTheme, Store {
   final _$_MyThemeActionController = ActionController(name: '_MyTheme');
 
   @override
+  Icon icon() {
+    final _$actionInfo =
+        _$_MyThemeActionController.startAction(name: '_MyTheme.icon');
+    try {
+      return super.icon();
+    } finally {
+      _$_MyThemeActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void toggle() {
     final _$actionInfo =
         _$_MyThemeActionController.startAction(name: '_MyTheme.toggle');
