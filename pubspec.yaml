@@ -1,0 +1,24 @@
+name: counter_app
+description: A counter app which uses state management using mobx
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.12.0 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  mobx: any
+  flutter_mobx: any
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  mobx_codegen: any
+  build_runner: any
+
+flutter:
+  uses-material-design: true
